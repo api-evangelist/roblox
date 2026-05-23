@@ -1,0 +1,272 @@
+aid: roblox
+name: Roblox
+description: >-
+  Roblox is a user-generated content platform where creators build, publish,
+  and monetize immersive 3D experiences using Roblox Studio and the Luau
+  scripting language. Roblox exposes three distinct developer surfaces: the
+  in-engine Luau scripting API (Roblox Engine API) running inside experiences
+  and Studio plugins, the Roblox Studio plugin API for editor tooling, and
+  the Open Cloud API (apis.roblox.com) for external programmatic access from
+  servers, build pipelines, and back-office tools. The Open Cloud surface
+  covers DataStores, Memory Stores, Messaging Service, Place Publishing,
+  Universes, Assets, Inventory, Users, Groups, Notifications, Subscriptions,
+  and Luau Execution, authenticated either with API keys scoped per-resource
+  or with OAuth 2.0 for third-party apps. Roblox also publishes deep
+  documentation for the Engine API at create.roblox.com/docs and the legacy
+  ROBLOX Web APIs that power the website (subdomains such as users.roblox.com,
+  groups.roblox.com, inventory.roblox.com), which remain undocumented for
+  third parties.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://www.roblox.com
+created: '2024-01-01'
+modified: '2026-05-23'
+specificationVersion: '0.19'
+type: Index
+access: 3rd-Party
+tags:
+  - Assets
+  - DataStores
+  - Game Development
+  - Games
+  - Luau
+  - Messaging
+  - Open Cloud
+  - Roblox
+  - Scripting
+  - Studio
+  - UGC
+  - Universes
+apis:
+  - aid: roblox:roblox-open-cloud-api
+    name: Roblox Open Cloud API
+    description: >-
+      The Roblox Open Cloud API is the official external REST surface for
+      Roblox creators, studios, and partners. It exposes universes,
+      places, place publishing, ordered and standard data stores, memory
+      stores, messaging service, assets, inventory, users, groups,
+      subscriptions, notifications, and Luau Execution. Calls are
+      authenticated with an API key (created in the Creator Hub Credentials
+      page and scoped per-resource) or with OAuth 2.0 access tokens for
+      third-party applications.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/open-cloud
+    baseURL: https://apis.roblox.com
+    tags:
+      - API Keys
+      - OAuth
+      - Open Cloud
+      - REST
+    properties:
+      - type: Portal
+        url: https://create.roblox.com
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/open-cloud
+      - type: APIReference
+        url: https://create.roblox.com/docs/cloud/reference
+      - type: Authentication
+        url: https://create.roblox.com/docs/cloud/auth
+      - type: GettingStarted
+        url: https://create.roblox.com/docs/cloud/open-cloud/usage-api-key
+  - aid: roblox:roblox-open-cloud-datastores
+    name: Roblox Open Cloud Data Stores
+    description: >-
+      The Data Stores Open Cloud API reads and writes persistent
+      key-value data for an experience from outside the engine, including
+      standard data stores and ordered data stores. Used by build pipelines,
+      LiveOps tools, and external admin panels to bulk-edit player and
+      world state.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-data-stores
+    baseURL: https://apis.roblox.com/datastores
+    tags:
+      - Data Stores
+      - Open Cloud
+      - Persistence
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/open-cloud/usage-data-stores
+  - aid: roblox:roblox-open-cloud-messaging-service
+    name: Roblox Open Cloud Messaging Service
+    description: >-
+      The Messaging Service Open Cloud API publishes messages to a topic
+      that running game servers can subscribe to via the in-engine
+      MessagingService class, enabling cross-server and external-to-engine
+      broadcasts for LiveOps events and shutdowns.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-messaging-service
+    baseURL: https://apis.roblox.com/messaging-service
+    tags:
+      - Messaging
+      - Open Cloud
+      - Pub/Sub
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/open-cloud/usage-messaging-service
+  - aid: roblox:roblox-open-cloud-place-publishing
+    name: Roblox Open Cloud Place Publishing
+    description: >-
+      The Place Publishing Open Cloud API uploads .rbxl or .rbxlx files to
+      a place in a universe and either saves or publishes the new version,
+      enabling CI/CD pipelines for Roblox experiences.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-place-publishing
+    baseURL: https://apis.roblox.com/universes
+    tags:
+      - CI/CD
+      - Open Cloud
+      - Publishing
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/open-cloud/usage-place-publishing
+  - aid: roblox:roblox-open-cloud-assets
+    name: Roblox Open Cloud Assets
+    description: >-
+      The Assets Open Cloud API creates, updates, and reads assets (audio,
+      decals, images, models, mesh parts) on behalf of a user or group,
+      used by asset pipelines and content factories.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-assets
+    baseURL: https://apis.roblox.com/assets
+    tags:
+      - Assets
+      - Content
+      - Open Cloud
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/open-cloud/usage-assets
+  - aid: roblox:roblox-engine-api-luau
+    name: Roblox Engine API (Luau)
+    description: >-
+      The Roblox Engine API is the in-engine scripting surface used inside
+      experiences and Studio plugins. It is written in Luau, Roblox's
+      typed dialect of Lua 5.1, and exposes thousands of classes including
+      Workspace, Players, Workspace, ReplicatedStorage, ServerScriptService,
+      DataStoreService, MessagingService, HttpService, UserInputService,
+      RemoteEvent, and the entire 3D scene graph. This API runs inside the
+      Roblox runtime, not as a REST surface.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/reference/engine
+    baseURL: https://create.roblox.com/docs/reference/engine
+    tags:
+      - Engine
+      - Luau
+      - Scripting
+      - SDK
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/reference/engine
+      - type: ClassReference
+        url: https://create.roblox.com/docs/reference/engine/classes
+      - type: Language
+        url: https://luau.org
+  - aid: roblox:roblox-studio-plugin-api
+    name: Roblox Studio Plugin API
+    description: >-
+      The Roblox Studio Plugin API is a superset of the Engine API
+      available to plugins running inside Roblox Studio. It exposes
+      plugin-only services for toolbars, dock widgets, selection,
+      ChangeHistoryService, AssetService imports, and editor automation.
+      Plugins are distributed via the Creator Store.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/studio/plugins
+    baseURL: https://create.roblox.com/docs/studio/plugins
+    tags:
+      - Editor
+      - Plugins
+      - Studio
+      - Tooling
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/studio/plugins
+  - aid: roblox:roblox-oauth2
+    name: Roblox OAuth 2.0
+    description: >-
+      Roblox OAuth 2.0 lets third-party applications authenticate Roblox
+      users and obtain scoped access tokens to call permitted Open Cloud
+      resources on the user's behalf. Apps are registered in the Creator
+      Hub Credentials page and follow standard authorization-code-with-PKCE
+      flows.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://create.roblox.com/docs/cloud/auth/oauth2-overview
+    baseURL: https://apis.roblox.com/oauth
+    tags:
+      - Authentication
+      - OAuth
+      - OIDC
+      - PKCE
+    properties:
+      - type: Documentation
+        url: https://create.roblox.com/docs/cloud/auth/oauth2-overview
+common:
+  - url: https://www.roblox.com
+    name: Roblox Website
+    type: Website
+  - url: https://create.roblox.com
+    name: Roblox Creator Hub
+    type: Portal
+  - url: https://create.roblox.com/docs
+    name: Roblox Creator Documentation
+    type: Documentation
+  - url: https://create.roblox.com/docs/cloud
+    name: Roblox Cloud Documentation
+    type: Documentation
+  - url: https://create.roblox.com/docs/cloud/reference
+    name: Open Cloud API Reference
+    type: APIReference
+  - url: https://create.roblox.com/docs/cloud/auth
+    name: Open Cloud Authentication
+    type: Authentication
+  - url: https://create.roblox.com/store
+    name: Roblox Creator Store
+    type: Marketplace
+  - url: https://create.roblox.com/dashboard/credentials
+    name: Creator Hub Credentials
+    type: Credentials
+  - url: https://devforum.roblox.com
+    name: Roblox Developer Forum
+    type: Forum
+  - url: https://luau.org
+    name: Luau Language
+    type: Language
+  - url: https://github.com/luau-lang/luau
+    name: Luau on GitHub
+    type: GitHubRepository
+  - url: https://github.com/Roblox
+    name: Roblox on GitHub
+    type: GitHubOrganization
+  - url: https://status.roblox.com
+    name: Roblox Status
+    type: Status
+  - url: https://en.help.roblox.com
+    name: Roblox Help
+    type: Support
+  - url: https://www.roblox.com/info/terms
+    name: Roblox Terms of Use
+    type: TermsOfService
+  - url: https://www.roblox.com/info/privacy
+    name: Roblox Privacy Policy
+    type: PrivacyPolicy
+  - url: https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Community-Standards
+    name: Roblox Community Standards
+    type: CommunityGuidelines
+  - url: https://blog.roblox.com
+    name: Roblox Blog
+    type: Blog
+  - url: https://corp.roblox.com
+    name: Roblox Corporation
+    type: ParentCompany
+  - url: https://x.com/Roblox
+    name: Roblox on X
+    type: X
+  - url: https://www.facebook.com/Roblox
+    name: Roblox on Facebook
+    type: Facebook
+  - url: https://www.linkedin.com/company/roblox
+    name: Roblox on LinkedIn
+    type: LinkedIn
+  - url: https://www.youtube.com/@Roblox
+    name: Roblox on YouTube
+    type: YouTube
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
