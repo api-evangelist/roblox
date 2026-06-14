@@ -1,0 +1,1262 @@
+"""
+Roblox GraphQL Schema
+Conceptual schema covering Roblox Open Cloud API, Engine API, and platform surfaces:
+Users, Groups, Games/Universes, Assets, Avatar, Economy, DataStores, Social, Inventory, Analytics.
+"""
+
+scalar DateTime
+scalar Long
+scalar JSON
+scalar Upload
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum UserStatus {
+  ONLINE
+  IN_GAME
+  IN_STUDIO
+  OFFLINE
+}
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum TradeStatus {
+  OPEN
+  PENDING
+  COMPLETED
+  DECLINED
+  INACTIVE
+  COUNTERED
+  EXPIRED
+  UNKNOWN
+}
+
+enum AssetType {
+  IMAGE
+  AUDIO
+  MESH
+  LUA
+  HTML
+  TEXT
+  HAT
+  PLACE
+  MODEL
+  SHIRT
+  PANTS
+  DECAL
+  AVATAR
+  HEAD
+  FACE
+  GEAR
+  BADGE
+  GAME_PASS
+  ANIMATION
+  ARMS
+  LEGS
+  TORSO
+  RIGHT_ARM
+  LEFT_ARM
+  RIGHT_LEG
+  LEFT_LEG
+  PACKAGE
+  YOUTUBE_VIDEO
+  GAME_CARD
+  T_SHIRT
+  PLUGIN
+  MESH_PART
+  HAIR_ACCESSORY
+  FACE_ACCESSORY
+  NECK_ACCESSORY
+  SHOULDER_ACCESSORY
+  FRONT_ACCESSORY
+  BACK_ACCESSORY
+  WAIST_ACCESSORY
+  CLIMB_ANIMATION
+  DEATH_ANIMATION
+  FALL_ANIMATION
+  IDLE_ANIMATION
+  JUMP_ANIMATION
+  RUN_ANIMATION
+  SWIM_ANIMATION
+  WALK_ANIMATION
+  POSE_ANIMATION
+  EMOTE_ANIMATION
+  VIDEO
+  TEXTURE_PACK
+}
+
+enum GroupMemberRole {
+  GUEST
+  MEMBER
+  OFFICER
+  ADMIN
+  OWNER
+}
+
+enum GroupJoinPolicy {
+  OPEN
+  REQUEST_TO_JOIN
+  CLOSED
+}
+
+enum AvatarType {
+  R6
+  R15
+}
+
+enum TransactionType {
+  PURCHASE
+  SALE
+  TRADE
+  DEV_EXCHANGE
+  SUBSCRIPTION
+  AFFILIATE
+  PREMIUM
+  BADGE
+  GAME_PASS
+  REFUND
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  PAYMENT_FAILED
+}
+
+enum ThumbnailState {
+  COMPLETED
+  PENDING
+  ERROR
+  BLOCKED
+}
+
+enum ModerationState {
+  APPROVED
+  PENDING
+  REJECTED
+  DELETED
+}
+
+enum ServerType {
+  PUBLIC
+  PRIVATE
+  RESERVED
+}
+
+enum PlaceAccessType {
+  PUBLIC
+  FRIENDS
+  PRIVATE
+}
+
+# ─────────────────────────────────────────────
+# User domain
+# ─────────────────────────────────────────────
+
+type User {
+  id: ID!
+  name: String!
+  displayName: String!
+  description: String
+  created: DateTime!
+  isBanned: Boolean!
+  hasVerifiedBadge: Boolean!
+  profile: UserProfile
+  presence: UserPresence
+  friends(limit: Int, cursor: String): FriendConnection
+  groups(limit: Int, cursor: String): GroupMemberConnection
+  inventory(limit: Int, cursor: String, assetType: AssetType): InventoryItemConnection
+  avatar: UserAvatar
+  badges(limit: Int, cursor: String): BadgeAwardedConnection
+  gamePasses(limit: Int, cursor: String): GamePassConnection
+  thumbnail(size: String, format: String): Thumbnail
+  outfits(limit: Int, cursor: String): UserOutfitConnection
+  premium: Premium
+}
+
+type UserProfile {
+  userId: ID!
+  blurb: String
+  created: DateTime!
+  isBanned: Boolean!
+  hasVerifiedBadge: Boolean!
+  socialLinks: [SocialLink!]
+}
+
+type UserPresence {
+  userId: ID!
+  userPresenceType: UserStatus!
+  lastLocation: String
+  placeId: Long
+  rootPlaceId: Long
+  universeId: Long
+  lastOnline: DateTime
+  gameId: String
+}
+
+type SocialLink {
+  id: ID!
+  type: String!
+  url: String!
+  title: String!
+}
+
+type UserConnection {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Friend / Social domain
+# ─────────────────────────────────────────────
+
+type Friend {
+  id: ID!
+  name: String!
+  displayName: String!
+  hasVerifiedBadge: Boolean!
+  friendFrequentScore: Int
+  isOnline: Boolean
+  presence: UserPresence
+}
+
+type FriendRequest {
+  id: ID!
+  senderId: ID!
+  sender: User
+  receiverId: ID!
+  receiver: User
+  created: DateTime!
+  status: FriendRequestStatus!
+}
+
+type FollowingStatus {
+  isFollowing: Boolean!
+  isFollowedBy: Boolean!
+  areFriends: Boolean!
+}
+
+type FriendConnection {
+  nodes: [Friend!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type FriendRequestConnection {
+  nodes: [FriendRequest!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Group domain
+# ─────────────────────────────────────────────
+
+type Group {
+  id: ID!
+  name: String!
+  description: String
+  memberCount: Int!
+  created: DateTime!
+  publicEntryAllowed: Boolean!
+  joinPolicy: GroupJoinPolicy!
+  hasVerifiedBadge: Boolean!
+  owner: Creator
+  shout: GroupShout
+  roles(limit: Int): [GroupRole!]
+  members(limit: Int, cursor: String): GroupMemberConnection
+  membershipRequests(limit: Int, cursor: String): GroupMembershipRequestConnection
+  payoutRecipients: [GroupPayoutRecipient!]
+  thumbnail: Thumbnail
+  games(limit: Int, cursor: String): GameConnection
+}
+
+type GroupRole {
+  id: ID!
+  name: String!
+  rank: Int!
+  memberCount: Int
+  permissions: GroupRolePermissions
+}
+
+type GroupRolePermissions {
+  groupPostsPermissions: GroupPostsPermissions
+  groupMembershipPermissions: GroupMembershipPermissions
+  groupManagementPermissions: GroupManagementPermissions
+  groupEconomyPermissions: GroupEconomyPermissions
+}
+
+type GroupPostsPermissions {
+  viewWall: Boolean!
+  postToWall: Boolean!
+  deleteFromWall: Boolean!
+  viewStatus: Boolean!
+  postToStatus: Boolean!
+}
+
+type GroupMembershipPermissions {
+  changeRank: Boolean!
+  inviteMembers: Boolean!
+  removeMembers: Boolean!
+}
+
+type GroupManagementPermissions {
+  manageRelationships: Boolean!
+  manageClan: Boolean!
+  viewAuditLog: Boolean!
+}
+
+type GroupEconomyPermissions {
+  spendGroupFunds: Boolean!
+  advertiseGroup: Boolean!
+  createItems: Boolean!
+  manageItems: Boolean!
+  addGroupPlaces: Boolean!
+  manageGroupGames: Boolean!
+  viewGroupPayouts: Boolean!
+  viewAnalytics: Boolean!
+}
+
+type GroupMember {
+  user: User!
+  role: GroupRole!
+  joinedAt: DateTime
+}
+
+type GroupMembershipRequest {
+  userId: ID!
+  user: User
+  created: DateTime!
+}
+
+type GroupPayoutRecipient {
+  user: User!
+  percentage: Int!
+}
+
+type GroupShout {
+  body: String!
+  poster: User
+  created: DateTime!
+  updated: DateTime!
+}
+
+type GroupMemberConnection {
+  nodes: [GroupMember!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type GroupMembershipRequestConnection {
+  nodes: [GroupMembershipRequest!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type GroupConnection {
+  nodes: [Group!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Game / Universe / Place domain
+# ─────────────────────────────────────────────
+
+type Game {
+  id: ID!
+  rootPlaceId: Long!
+  name: String!
+  description: String
+  created: DateTime!
+  updated: DateTime!
+  maxPlayers: Int!
+  allowedGearTypes: [String!]
+  genre: String
+  isAllGenre: Boolean!
+  isFavoritedByUser: Boolean
+  favoritedCount: Long
+  playing: Int
+  visits: Long
+  creator: Creator!
+  media: [GameMedia!]
+  badges(limit: Int, cursor: String): BadgeConnection
+  gamePasses(limit: Int, cursor: String): GamePassConnection
+  servers(serverType: ServerType, limit: Int, cursor: String): ServerConnection
+  permissions: GamePermission
+  settings: GameSettings
+  thumbnail: Thumbnail
+  stats: UniverseStats
+}
+
+type GameMedia {
+  id: ID!
+  mediaType: String!
+  imageId: Long
+  videoHash: String
+  videoTitle: String
+  approved: Boolean!
+}
+
+type GameSettings {
+  universeId: ID!
+  allowPrivateServers: Boolean!
+  privateServerPrice: Int
+  optInRegions: [String!]
+  optOutRegions: [String!]
+  isMeshTextureApiAccessAllowed: Boolean
+}
+
+type GamePermission {
+  isThirdPartyTeleportAllowed: Boolean!
+  isThirdPartyAssetAllowed: Boolean!
+  isThirdPartyPurchaseAllowed: Boolean!
+}
+
+type GameBadge {
+  id: ID!
+  name: String!
+  description: String
+  displayName: String
+  displayDescription: String
+  enabled: Boolean!
+  iconImageId: Long!
+  displayIconImageId: Long
+  created: DateTime!
+  updated: DateTime!
+  statistics: BadgeStatistics
+}
+
+type Server {
+  id: ID!
+  maxPlayers: Int!
+  playing: Int!
+  playerTokens: [String!]
+  fps: Float
+  ping: Int
+  name: String
+  vipServerId: Long
+  vipServerOwnerId: Long
+  accessCode: String
+}
+
+type PlaceUpdate {
+  placeId: Long!
+  universeId: Long!
+  versionNumber: Int
+  publishType: String
+  created: DateTime
+}
+
+type GameConnection {
+  nodes: [Game!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type ServerConnection {
+  nodes: [Server!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# DataStore domain
+# ─────────────────────────────────────────────
+
+type DataStore {
+  name: String!
+  createdTime: DateTime
+  entries(limit: Int, cursor: String, prefix: String): DataStoreEntryConnection
+}
+
+type DataStoreEntry {
+  key: String!
+  value: JSON
+  version: String
+  created: DateTime
+  updated: DateTime
+  userIds: [Long!]
+  attributes: JSON
+  checksum: String
+}
+
+type OrderedDataStore {
+  name: String!
+  scope: String
+  entries(limit: Int, cursor: String, ascending: Boolean): OrderedDataStoreEntryConnection
+}
+
+type OrderedDataStoreEntry {
+  key: String!
+  value: Long!
+}
+
+type DataStoreEntryConnection {
+  nodes: [DataStoreEntry!]!
+  pageInfo: PageInfo!
+}
+
+type OrderedDataStoreEntryConnection {
+  nodes: [OrderedDataStoreEntry!]!
+  pageInfo: PageInfo!
+}
+
+# ─────────────────────────────────────────────
+# Messaging domain
+# ─────────────────────────────────────────────
+
+type Message {
+  id: Long!
+  sender: User
+  recipient: User
+  subject: String!
+  body: String!
+  created: DateTime!
+  updated: DateTime
+  isRead: Boolean!
+  isSystemMessage: Boolean!
+}
+
+type MessagingServiceMessage {
+  message: String!
+  sent: Boolean!
+  topic: String!
+}
+
+type MessageConnection {
+  nodes: [Message!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Asset domain
+# ─────────────────────────────────────────────
+
+type Asset {
+  id: ID!
+  name: String!
+  description: String
+  typeId: Int!
+  assetType: AssetType!
+  created: DateTime!
+  updated: DateTime!
+  creator: Creator!
+  isPublicDomain: Boolean
+  isForSale: Boolean
+  price: Int
+  sales: Long
+  revision: Int
+  currentVersionId: Long
+  moderationState: ModerationState
+  versions(limit: Int, cursor: String): AssetVersionConnection
+}
+
+type AssetVersion {
+  Id: Long!
+  assetId: Long!
+  assetVersionNumber: Int!
+  creatorType: String!
+  creatorTargetId: Long!
+  contentUrl: String
+  created: DateTime!
+  isPublished: Boolean!
+}
+
+type AssetOwner {
+  assetId: Long!
+  owner: User
+  group: Group
+  ownerType: String!
+}
+
+type AssetVersionConnection {
+  nodes: [AssetVersion!]!
+  pageInfo: PageInfo!
+}
+
+type AssetConnection {
+  nodes: [Asset!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Badge domain
+# ─────────────────────────────────────────────
+
+type Badge {
+  id: ID!
+  name: String!
+  description: String
+  displayName: String
+  displayDescription: String
+  enabled: Boolean!
+  iconImageId: Long!
+  displayIconImageId: Long
+  created: DateTime!
+  updated: DateTime!
+  awardingUniverse: Game
+  statistics: BadgeStatistics
+}
+
+type BadgeStatistics {
+  pastDayAwardedCount: Long!
+  awardedCount: Long!
+  winRatePercentage: Float!
+}
+
+type BadgeAwarded {
+  badgeId: Long!
+  badge: Badge
+  awardedAt: DateTime!
+  userId: Long!
+}
+
+type BadgeConnection {
+  nodes: [Badge!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type BadgeAwardedConnection {
+  nodes: [BadgeAwarded!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Bundle & GamePass domain
+# ─────────────────────────────────────────────
+
+type Bundle {
+  id: ID!
+  name: String!
+  description: String
+  bundleType: String!
+  items: [BundleItem!]
+  creator: Creator!
+  product: CatalogProduct
+}
+
+type BundleItem {
+  owned: Boolean!
+  type: String!
+  id: Long!
+  name: String!
+}
+
+type GamePass {
+  id: ID!
+  name: String!
+  description: String
+  displayName: String
+  price: Int
+  isOwned: Boolean
+  iconImageId: Long
+  game: Game
+}
+
+type GamePassConnection {
+  nodes: [GamePass!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+type CatalogProduct {
+  id: Long!
+  type: String!
+  isPublicDomain: Boolean!
+  isForSale: Boolean!
+  priceInRobux: Int
+  premiumPricing: PremiumPricing
+}
+
+type PremiumPricing {
+  premiumDiscountPercentage: Int!
+  premiumPriceInRobux: Int!
+}
+
+# ─────────────────────────────────────────────
+# Economy / Currency / Premium domain
+# ─────────────────────────────────────────────
+
+type Premium {
+  userId: ID!
+  isPremium: Boolean!
+  subscription: PremiumSubscription
+}
+
+type PremiumSubscription {
+  subscriptionProductModel: PremiumProduct
+  status: SubscriptionStatus!
+  nextRenewalDate: DateTime
+  expiredDate: DateTime
+}
+
+type PremiumProduct {
+  premiumFeatureId: Int!
+  name: String!
+  robuxStipendAmount: Int!
+  isLifetime: Boolean!
+}
+
+type Currency {
+  robux: Int!
+}
+
+type Robux {
+  amount: Int!
+  userId: ID
+}
+
+type Subscription {
+  id: ID!
+  userId: ID!
+  productId: ID!
+  status: SubscriptionStatus!
+  startedAt: DateTime!
+  renewsAt: DateTime
+  cancelledAt: DateTime
+  expiresAt: DateTime
+}
+
+type Transaction {
+  id: Long!
+  created: DateTime!
+  isPending: Boolean!
+  agent: TransactionAgent
+  details: TransactionDetails
+  currency: Currency!
+  transactionType: TransactionType!
+}
+
+type TransactionAgent {
+  id: Long!
+  type: String!
+  name: String
+}
+
+type TransactionDetails {
+  id: Long!
+  name: String
+  type: String
+}
+
+type DeveloperExchange {
+  id: Long!
+  userId: Long!
+  amount: Int!
+  robuxAmount: Long!
+  status: String!
+  created: DateTime!
+  currency: String!
+}
+
+type TransactionConnection {
+  nodes: [Transaction!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Creator domain
+# ─────────────────────────────────────────────
+
+type Creator {
+  id: ID!
+  type: String!
+  name: String!
+  profile: CreatorProfile
+}
+
+type CreatorProfile {
+  creatorId: ID!
+  creatorType: String!
+  description: String
+  created: DateTime!
+  hasVerifiedBadge: Boolean!
+  socialLinks: [SocialLink!]
+}
+
+# ─────────────────────────────────────────────
+# Inventory domain
+# ─────────────────────────────────────────────
+
+type InventoryItem {
+  assetId: Long!
+  name: String!
+  assetType: AssetType!
+  created: DateTime!
+  updated: DateTime
+  isOnSale: Boolean
+  userOutfitId: Long
+  instanceId: String
+  collectibleItemId: String
+  collectibleItemInstanceId: String
+  serialNumber: Long
+}
+
+type InventoryItemConnection {
+  nodes: [InventoryItem!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Trade domain
+# ─────────────────────────────────────────────
+
+type Trade {
+  id: Long!
+  user: User!
+  status: TradeStatus!
+  created: DateTime!
+  expiration: DateTime
+  isActive: Boolean!
+  offers: [TradeOffer!]!
+}
+
+type TradeOffer {
+  userId: Long!
+  user: User
+  userAssets: [TradeItem!]!
+  robux: Int!
+}
+
+type TradeItem {
+  id: Long!
+  serialNumber: Long
+  assetId: Long!
+  name: String!
+  recentAveragePrice: Int
+  originalPrice: Int
+  assetStock: Long
+  membershipType: String
+}
+
+type TradeStatus {
+  id: Long!
+  status: TradeStatus!
+}
+
+type TradeConnection {
+  nodes: [Trade!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Avatar domain
+# ─────────────────────────────────────────────
+
+type Avatar {
+  userId: ID!
+  bodyType: AvatarType!
+  bodyColors: AvatarBodyColors!
+  scales: AvatarScale!
+  assets: [AvatarAsset!]
+  defaultShirtApplied: Boolean!
+  defaultPantsApplied: Boolean!
+  emotes: [AvatarEmote!]
+}
+
+type AvatarScale {
+  height: Float!
+  width: Float!
+  head: Float!
+  depth: Float!
+  proportion: Float!
+  bodyType: Float!
+}
+
+type AvatarColorsMap {
+  brickColor: String!
+  hexColor: String!
+  name: String!
+  r: Int!
+  g: Int!
+  b: Int!
+}
+
+type AvatarBodyColors {
+  headColorId: Int!
+  torsoColorId: Int!
+  rightArmColorId: Int!
+  leftArmColorId: Int!
+  rightLegColorId: Int!
+  leftLegColorId: Int!
+  headColor: AvatarColorsMap
+  torsoColor: AvatarColorsMap
+  rightArmColor: AvatarColorsMap
+  leftArmColor: AvatarColorsMap
+  rightLegColor: AvatarColorsMap
+  leftLegColor: AvatarColorsMap
+}
+
+type AvatarAsset {
+  id: Long!
+  name: String!
+  assetType: AvatarAssetType!
+  currentVersionId: Long
+  meta: AvatarAssetMeta
+}
+
+type AvatarAssetType {
+  id: Int!
+  name: String!
+}
+
+type AvatarAssetMeta {
+  order: Int
+  puffiness: Float
+  version: Int
+}
+
+type AvatarEmote {
+  assetId: Long!
+  assetName: String!
+  position: Int!
+}
+
+type UserAvatar {
+  userId: ID!
+  avatar: Avatar
+}
+
+type UserOutfit {
+  id: Long!
+  name: String!
+  isEditable: Boolean!
+  outfitType: String
+  bodyColors: AvatarBodyColors
+  assets: [AvatarAsset!]
+  scale: AvatarScale
+  playerAvatarType: AvatarType
+}
+
+type UserOutfitConnection {
+  nodes: [UserOutfit!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+# ─────────────────────────────────────────────
+# Thumbnail domain
+# ─────────────────────────────────────────────
+
+type Thumbnail {
+  targetId: Long!
+  state: ThumbnailState!
+  imageUrl: String
+  version: String
+}
+
+type Animation {
+  id: Long!
+  name: String!
+  description: String
+  assetId: Long!
+  created: DateTime!
+  updated: DateTime!
+  creator: Creator!
+}
+
+# ─────────────────────────────────────────────
+# Analytics / Stats domain
+# ─────────────────────────────────────────────
+
+type UniverseStats {
+  universeId: Long!
+  visits: Long
+  favorites: Long
+  playing: Int
+  likes: Long
+  dislikes: Long
+  revenue: Long
+}
+
+type AnalyticsEvent {
+  eventType: String!
+  eventTimestamp: DateTime!
+  universeId: Long!
+  placeId: Long
+  sessionId: String
+  properties: JSON
+}
+
+# ─────────────────────────────────────────────
+# Instance domain (Open Cloud Instances API)
+# ─────────────────────────────────────────────
+
+type Instance {
+  id: ID!
+  engineId: String!
+  parent: Instance
+  name: String!
+  details: InstanceDetails
+}
+
+type InstanceDetails {
+  className: String!
+  properties: JSON
+}
+
+# ─────────────────────────────────────────────
+# Pagination
+# ─────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  nextPageCursor: String
+  previousPageCursor: String
+}
+
+# ─────────────────────────────────────────────
+# Inputs
+# ─────────────────────────────────────────────
+
+input UserFilterInput {
+  ids: [ID!]
+  names: [String!]
+  hasVerifiedBadge: Boolean
+}
+
+input GroupFilterInput {
+  userId: ID
+  nameKeyword: String
+}
+
+input GameFilterInput {
+  creatorId: ID
+  creatorType: String
+  genre: String
+  sortOrder: String
+}
+
+input AssetFilterInput {
+  creatorId: ID
+  creatorType: String
+  assetType: AssetType
+  isForSale: Boolean
+}
+
+input TradeFilterInput {
+  userId: ID
+  status: TradeStatus
+}
+
+input DataStoreEntryInput {
+  key: String!
+  value: JSON!
+  userIds: [Long!]
+  attributes: JSON
+}
+
+input OrderedDataStoreEntryInput {
+  key: String!
+  value: Long!
+}
+
+input PublishMessageInput {
+  topic: String!
+  message: String!
+}
+
+input AvatarUpdateInput {
+  bodyType: AvatarType
+  scales: AvatarScaleInput
+  bodyColors: AvatarBodyColorsInput
+  assetIds: [Long!]
+}
+
+input AvatarScaleInput {
+  height: Float
+  width: Float
+  head: Float
+  depth: Float
+  proportion: Float
+  bodyType: Float
+}
+
+input AvatarBodyColorsInput {
+  headColorId: Int
+  torsoColorId: Int
+  rightArmColorId: Int
+  leftArmColorId: Int
+  rightLegColorId: Int
+  leftLegColorId: Int
+}
+
+input OutfitCreateInput {
+  name: String!
+  bodyColors: AvatarBodyColorsInput!
+  assetIds: [Long!]!
+  scale: AvatarScaleInput!
+  playerAvatarType: AvatarType!
+}
+
+input PlacePublishInput {
+  universeId: Long!
+  placeId: Long!
+  versionType: String!
+  file: Upload!
+}
+
+# ─────────────────────────────────────────────
+# Root types
+# ─────────────────────────────────────────────
+
+type Query {
+  # User queries
+  user(id: ID!): User
+  userByName(username: String!): User
+  users(filter: UserFilterInput, limit: Int, cursor: String): UserConnection
+  userPresence(userIds: [ID!]!): [UserPresence!]
+  followingStatus(userId: ID!, targetUserId: ID!): FollowingStatus
+
+  # Friend queries
+  friends(userId: ID!, limit: Int, cursor: String): FriendConnection
+  friendRequests(userId: ID!, limit: Int, cursor: String): FriendRequestConnection
+
+  # Group queries
+  group(id: ID!): Group
+  groups(filter: GroupFilterInput, limit: Int, cursor: String): GroupConnection
+  groupsByUser(userId: ID!, limit: Int, cursor: String): GroupMemberConnection
+
+  # Game / Universe queries
+  game(id: ID!): Game
+  games(filter: GameFilterInput, limit: Int, cursor: String): GameConnection
+  popularGames(genre: String, limit: Int, cursor: String): GameConnection
+  gameServers(universeId: ID!, serverType: ServerType, limit: Int, cursor: String): ServerConnection
+
+  # Asset queries
+  asset(id: ID!): Asset
+  assets(filter: AssetFilterInput, limit: Int, cursor: String): AssetConnection
+  assetVersions(assetId: ID!, limit: Int, cursor: String): AssetVersionConnection
+
+  # Badge queries
+  badge(id: ID!): Badge
+  badgesByGame(universeId: ID!, limit: Int, cursor: String): BadgeConnection
+  badgesAwardedToUser(userId: ID!, limit: Int, cursor: String): BadgeAwardedConnection
+
+  # Bundle & GamePass queries
+  bundle(id: ID!): Bundle
+  gamePass(id: ID!): GamePass
+  gamePassesByGame(universeId: ID!, limit: Int, cursor: String): GamePassConnection
+
+  # Avatar queries
+  avatar(userId: ID!): Avatar
+  avatarMetadata: JSON
+  userOutfits(userId: ID!, limit: Int, cursor: String): UserOutfitConnection
+
+  # Inventory queries
+  inventory(userId: ID!, assetType: AssetType, limit: Int, cursor: String): InventoryItemConnection
+
+  # Trade queries
+  trade(id: Long!): Trade
+  trades(filter: TradeFilterInput, limit: Int, cursor: String): TradeConnection
+
+  # Economy queries
+  robuxBalance(userId: ID!): Robux
+  transactions(userId: ID!, transactionType: TransactionType, limit: Int, cursor: String): TransactionConnection
+  premium(userId: ID!): Premium
+
+  # DataStore queries
+  dataStore(universeId: ID!, name: String!, scope: String): DataStore
+  dataStores(universeId: ID!, prefix: String, limit: Int, cursor: String): [DataStore!]
+  dataStoreEntry(universeId: ID!, datastoreName: String!, entryKey: String!, scope: String): DataStoreEntry
+  orderedDataStore(universeId: ID!, name: String!, scope: String): OrderedDataStore
+
+  # Message queries
+  messages(userId: ID!, limit: Int, cursor: String): MessageConnection
+
+  # Analytics queries
+  universeStats(universeId: ID!): UniverseStats
+
+  # Thumbnail queries
+  userThumbnail(userId: ID!, size: String, format: String): Thumbnail
+  assetThumbnail(assetId: ID!, size: String, format: String): Thumbnail
+  gameThumbnail(universeId: ID!, size: String, format: String): Thumbnail
+
+  # Instance queries
+  instance(universeId: ID!, placeId: Long!, instanceId: ID!): Instance
+}
+
+type Mutation {
+  # Friend mutations
+  sendFriendRequest(userId: ID!): FriendRequest
+  acceptFriendRequest(userId: ID!): Friend
+  declineFriendRequest(userId: ID!): Boolean
+  unfriend(userId: ID!): Boolean
+  followUser(userId: ID!): Boolean
+  unfollowUser(userId: ID!): Boolean
+
+  # Group mutations
+  joinGroup(groupId: ID!): GroupMember
+  leaveGroup(groupId: ID!): Boolean
+  requestGroupMembership(groupId: ID!): GroupMembershipRequest
+  approveGroupMembership(groupId: ID!, userId: ID!): GroupMember
+  declineGroupMembership(groupId: ID!, userId: ID!): Boolean
+  updateGroupMemberRole(groupId: ID!, userId: ID!, roleId: ID!): GroupMember
+  removeGroupMember(groupId: ID!, userId: ID!): Boolean
+  updateGroupShout(groupId: ID!, message: String!): GroupShout
+
+  # Avatar mutations
+  updateAvatar(userId: ID!, input: AvatarUpdateInput!): Avatar
+  createOutfit(userId: ID!, input: OutfitCreateInput!): UserOutfit
+  updateOutfit(outfitId: Long!, input: OutfitCreateInput!): UserOutfit
+  deleteOutfit(outfitId: Long!): Boolean
+  wearOutfit(userId: ID!, outfitId: Long!): Avatar
+
+  # DataStore mutations
+  setDataStoreEntry(universeId: ID!, datastoreName: String!, entryKey: String!, input: DataStoreEntryInput!): DataStoreEntry
+  deleteDataStoreEntry(universeId: ID!, datastoreName: String!, entryKey: String!): Boolean
+  updateOrderedDataStoreEntry(universeId: ID!, datastoreName: String!, entryKey: String!, input: OrderedDataStoreEntryInput!): OrderedDataStoreEntry
+  deleteOrderedDataStoreEntry(universeId: ID!, datastoreName: String!, entryKey: String!): Boolean
+
+  # Messaging mutations
+  publishMessage(universeId: ID!, input: PublishMessageInput!): MessagingServiceMessage
+  sendMessage(userId: ID!, subject: String!, body: String!): Message
+  markMessageRead(messageId: Long!): Message
+  deleteMessage(messageId: Long!): Boolean
+
+  # Place mutations
+  publishPlace(input: PlacePublishInput!): PlaceUpdate
+
+  # Trade mutations
+  sendTrade(targetUserId: ID!, offer: TradeOfferInput!, request: TradeOfferInput!): Trade
+  acceptTrade(tradeId: Long!): TradeStatus
+  declineTrade(tradeId: Long!): TradeStatus
+  counterTrade(tradeId: Long!, offer: TradeOfferInput!, request: TradeOfferInput!): Trade
+}
+
+input TradeOfferInput {
+  userId: Long!
+  userAssetIds: [Long!]!
+  robux: Int!
+}
+
+type Subscription {
+  # Real-time game presence updates
+  userPresenceUpdated(userId: ID!): UserPresence
+  # Real-time messaging
+  messageReceived(userId: ID!): Message
+  # Analytics event stream
+  analyticsEvent(universeId: ID!): AnalyticsEvent
+  # Trade status changes
+  tradeStatusUpdated(userId: ID!): Trade
+}
