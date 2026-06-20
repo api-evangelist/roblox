@@ -13,7 +13,7 @@ description: 'Roblox is a user-generated content platform where creators build, 
   Engine API at create.roblox.com/docs and the legacy ROBLOX Web APIs that power the
   website (subdomains such as users.roblox.com, groups.roblox.com, inventory.roblox.com),
   which remain undocumented for third parties.'
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://www.roblox.com
 created: '2024-01-01'
 modified: '2026-05-23'
@@ -42,7 +42,7 @@ apis:
     users, groups, subscriptions, notifications, and Luau Execution. Calls are authenticated
     with an API key (created in the Creator Hub Credentials page and scoped per-resource)
     or with OAuth 2.0 access tokens for third-party applications.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/open-cloud
   baseURL: https://apis.roblox.com
   tags:
@@ -69,7 +69,7 @@ apis:
     data for an experience from outside the engine, including standard data stores
     and ordered data stores. Used by build pipelines, LiveOps tools, and external
     admin panels to bulk-edit player and world state.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-data-stores
   baseURL: https://apis.roblox.com/datastores
   tags:
@@ -85,7 +85,7 @@ apis:
     that running game servers can subscribe to via the in-engine MessagingService
     class, enabling cross-server and external-to-engine broadcasts for LiveOps events
     and shutdowns.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-messaging-service
   baseURL: https://apis.roblox.com/messaging-service
   tags:
@@ -100,7 +100,7 @@ apis:
   description: The Place Publishing Open Cloud API uploads .rbxl or .rbxlx files to
     a place in a universe and either saves or publishes the new version, enabling
     CI/CD pipelines for Roblox experiences.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-place-publishing
   baseURL: https://apis.roblox.com/universes
   tags:
@@ -115,7 +115,7 @@ apis:
   description: The Assets Open Cloud API creates, updates, and reads assets (audio,
     decals, images, models, mesh parts) on behalf of a user or group, used by asset
     pipelines and content factories.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-assets
   baseURL: https://apis.roblox.com/assets
   tags:
@@ -133,7 +133,7 @@ apis:
     ReplicatedStorage, ServerScriptService, DataStoreService, MessagingService, HttpService,
     UserInputService, RemoteEvent, and the entire 3D scene graph. This API runs inside
     the Roblox runtime, not as a REST surface.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/reference/engine
   baseURL: https://create.roblox.com/docs/reference/engine
   tags:
@@ -154,7 +154,7 @@ apis:
     to plugins running inside Roblox Studio. It exposes plugin-only services for toolbars,
     dock widgets, selection, ChangeHistoryService, AssetService imports, and editor
     automation. Plugins are distributed via the Creator Store.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/studio/plugins
   baseURL: https://create.roblox.com/docs/studio/plugins
   tags:
@@ -171,7 +171,7 @@ apis:
     users and obtain scoped access tokens to call permitted Open Cloud resources on
     the user's behalf. Apps are registered in the Creator Hub Credentials page and
     follow standard authorization-code-with-PKCE flows.
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://create.roblox.com/docs/cloud/auth/oauth2-overview
   baseURL: https://apis.roblox.com/oauth
   tags:
