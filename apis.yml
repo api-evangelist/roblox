@@ -209,7 +209,7 @@ common:
   type: Credentials
 - url: https://devforum.roblox.com
   name: Roblox Developer Forum
-  type: Forum
+  type: Forums
 - url: https://luau.org
   name: Luau Language
   type: Language
