@@ -183,6 +183,10 @@ apis:
   - type: Documentation
     url: https://create.roblox.com/docs/cloud/auth/oauth2-overview
 common:
+- type: VulnerabilityDisclosure
+  url: security/roblox-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/roblox-domain-security.yml
 - url: https://www.roblox.com
   name: Roblox Website
   type: Website
