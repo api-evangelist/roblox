@@ -2,13 +2,21 @@
   "repo": "roblox",
   "feeds": [
     {
-      "source": "https://blog.roblox.com",
-      "feed_url": "",
+      "source": "https://about.roblox.com/newsroom",
+      "feed_url": "https://about.roblox.com/newsroom",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
+    },
+    {
+      "source": "https://blog.roblox.com",
+      "feed_url": "https://blog.roblox.com",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 5,
-  "fetched": "2026-06-27T13:06:16Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 7,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
