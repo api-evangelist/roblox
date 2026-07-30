@@ -13,7 +13,19 @@ description: 'Roblox is a user-generated content platform where creators build, 
   Engine API at create.roblox.com/docs and the legacy ROBLOX Web APIs that power the
   website (subdomains such as users.roblox.com, groups.roblox.com, inventory.roblox.com),
   which remain undocumented for third parties.'
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/roblox.png
 url: https://www.roblox.com
 created: '2024-01-01'
 modified: '2026-05-23'
