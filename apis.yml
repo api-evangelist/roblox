@@ -34,6 +34,19 @@ type: Index
 access: 3rd-Party
 tags:
 - Assets
+- Datastores
+- Game Development
+- Games
+- Luau
+- Messaging
+- Open Cloud
+- Roblox
+- Scripting
+- Studio
+- UGC
+- Universes
+tags_raw:
+- Assets
 - DataStores
 - Game Development
 - Games
@@ -58,6 +71,11 @@ apis:
   humanURL: https://create.roblox.com/docs/cloud/open-cloud
   baseURL: https://apis.roblox.com
   tags:
+  - APIKeys
+  - Authentication
+  - Open Cloud
+  - REST
+  tags_raw:
   - API Keys
   - OAuth
   - Open Cloud
@@ -85,6 +103,10 @@ apis:
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-data-stores
   baseURL: https://apis.roblox.com/datastores
   tags:
+  - Datastores
+  - Open Cloud
+  - Persistence
+  tags_raw:
   - Data Stores
   - Open Cloud
   - Persistence
@@ -101,6 +123,10 @@ apis:
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-messaging-service
   baseURL: https://apis.roblox.com/messaging-service
   tags:
+  - Messaging
+  - Open Cloud
+  - Pub-Sub
+  tags_raw:
   - Messaging
   - Open Cloud
   - Pub/Sub
@@ -187,6 +213,10 @@ apis:
   humanURL: https://create.roblox.com/docs/cloud/auth/oauth2-overview
   baseURL: https://apis.roblox.com/oauth
   tags:
+  - Authentication
+  - OIDC
+  - PKCE
+  tags_raw:
   - Authentication
   - OAuth
   - OIDC
