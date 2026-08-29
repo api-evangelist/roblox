@@ -13,6 +13,18 @@ description: 'Roblox is a user-generated content platform where creators build, 
   Engine API at create.roblox.com/docs and the legacy ROBLOX Web APIs that power the
   website (subdomains such as users.roblox.com, groups.roblox.com, inventory.roblox.com),
   which remain undocumented for third parties.'
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
