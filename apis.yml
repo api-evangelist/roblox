@@ -115,7 +115,7 @@ apis:
   humanURL: https://create.roblox.com/docs/cloud/open-cloud/usage-data-stores
   baseURL: https://apis.roblox.com/datastores
   tags:
-  - Data Stores
+  - Datastores
   - Open Cloud
   - Persistence
   tags_raw:
@@ -137,7 +137,7 @@ apis:
   tags:
   - Messaging
   - Open Cloud
-  - Pub/Sub
+  - Pub-Sub
   tags_raw:
   - Messaging
   - Open Cloud
