@@ -103,8 +103,6 @@ apis:
     url: https://create.roblox.com/docs/cloud/auth
   - type: GettingStarted
     url: https://create.roblox.com/docs/cloud/open-cloud/usage-api-key
-  - url: graphql/roblox-graphql.md
-    type: GraphQL
 - aid: roblox:roblox-open-cloud-datastores
   name: Roblox Open Cloud Data Stores
   description: The Data Stores Open Cloud API reads and writes persistent key-value
