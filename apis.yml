@@ -14,16 +14,19 @@ description: 'Roblox is a user-generated content platform where creators build, 
   website (subdomains such as users.roblox.com, groups.roblox.com, inventory.roblox.com),
   which remain undocumented for third parties.'
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - luau-lang/luau
   open_source: unknown
   commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free
@@ -57,6 +60,8 @@ tags:
 - Studio
 - UGC
 - Universes
+- Video Games
+- Gaming
 tags_raw:
 - Assets
 - DataStores
@@ -70,6 +75,8 @@ tags_raw:
 - Studio
 - UGC
 - Universes
+- Video Games
+- Gaming
 apis:
 - aid: roblox:roblox-open-cloud-api
   name: Roblox Open Cloud API
