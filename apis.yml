@@ -321,6 +321,8 @@ common:
 - url: https://www.youtube.com/@Roblox
   name: Roblox on YouTube
   type: YouTube
+- type: SpectralRules
+  url: https://github.com/Roblox/creator-docs/blob/4fc8478587ee7c1a412403d76baff4d0ede578d4/tools/checks/utils/openapi/spectral.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
