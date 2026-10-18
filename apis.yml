@@ -142,7 +142,7 @@ apis:
   tags:
   - Messaging
   - Open Cloud
-  - Pub-Sub
+  - Pub/Sub
   tags_raw:
   - Messaging
   - Open Cloud
@@ -231,7 +231,7 @@ apis:
   baseURL: https://apis.roblox.com/oauth
   tags:
   - Authentication
-  - OIDC
+  - OpenID Connect
   - PKCE
   tags_raw:
   - Authentication
