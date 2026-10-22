@@ -82,6 +82,110 @@ edges:
     sector: entertainment
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: FIRST (Forum of Incident Response and Security Teams)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.first.org/members/teams/roblox_detection_and_response_team-dart
+  category: Incident response / PSIRT (FIRST member team)
+  contract_reference:
+    register: FIRST member teams (api.first.org/data/v1/teams, public JSON API)
+    standard: FIRST (Forum of Incident Response and Security Teams) membership
+    spec_file: null
+    role: first-member-team
+    registered_name: Roblox Corporation
+    matched_domain: roblox.com
+    matched_by: domain+name-among-holders
+    teams:
+    - id: roblox_detection_and_response_team-dart
+      team: Roblox Detection and Response Team (DART)
+      team_type: null
+      member_since: January 29, 2024
+      country: US
+    signal_note: FIRST full membership of an incident-response / product-security team = participation; team_type
+      names CSIRT / PSIRT / SOC; never a count
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  detected_by: sweep-vulnerability-disclosure-cna.py
+  first_seen: '2026-10-22'
+- partner_name: Raycast
+  partner: raycast
+  partner_match: domain
+  partner_url: https://www.raycast.com
+  partner_domain: raycast.com
+  type: marketplace
+  marketplace: raycast-store
+  channel: connector-listing
+  relationship: connector-coverage
+  evidence: https://www.raycast.com/iamEvan/roblox
+  app: Roblox
+  category: Raycast Store extension (community wrapper)
+  listing_count: 4
+  contract_reference:
+    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
+    spec_file: null
+    role: raycast-community-wrapper
+    builder: community
+    authors:
+    - TaylorRobinson
+    - ben_rowlands
+    - iamEvan
+    - zw1ce
+    matched_domain: roblox.com
+    matched_by: domain+name-among-holders
+    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
+    listings:
+    - title: Roblox
+      store_url: https://www.raycast.com/iamEvan/roblox
+      installs: 648
+      categories:
+      - Productivity
+      - Fun
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox/
+      author: iamEvan
+    - title: Roblox
+      store_url: https://www.raycast.com/TaylorRobinson/roblox-games
+      installs: 258
+      categories: []
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-games/
+      author: TaylorRobinson
+    - title: Roblox Creator Docs
+      store_url: https://www.raycast.com/ben_rowlands/roblox-creator-docs
+      installs: 57
+      categories:
+      - Developer Tools
+      - Documentation
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-creator-docs/
+      author: ben_rowlands
+    - title: Roblox Developer Tools
+      store_url: https://www.raycast.com/zw1ce/roblox-developer-tools
+      installs: 0
+      categories:
+      - Developer Tools
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-developer-tools/
+      author: zw1ce
+    categories:
+    - Developer Tools
+    - Documentation
+    - Fun
+    - Productivity
+    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
+      passes partner_link's name check; built by Raycast community developers, not the vendor
+    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
+      (product, store); install / listing counts are context, never counted'
+    detected_by: sweep-raycast-store-extensions.py
+    detected: '2026-10-22'
+  detected_by: sweep-raycast-store-extensions.py
+  first_seen: '2026-10-22'
+  apps:
+  - Roblox
+  - Roblox
+  - Roblox Creator Docs
+  - Roblox Developer Tools
+  direction: partner-built
 method: searched
 checked:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
@@ -92,5 +196,10 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- https://api.first.org/data/v1/teams
+- https://raw.githubusercontent.com/CVEProject/cve-website/dev/src/assets/data/CNAsList.json
+- https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+- https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions
+- https://www.raycast.com/api/v1/store_listings
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/

@@ -87,3 +87,99 @@
     sector: entertainment
   status: not-a-workflow
   arazzo: null
+- slug: roblox-first-forum-of-incident-response-and-security-teams
+  label: FIRST (Forum of Incident Response and Security Teams)
+  partner_name: FIRST (Forum of Incident Response and Security Teams)
+  category: Incident response / PSIRT (FIRST member team)
+  type: register
+  channel: standard-directory
+  evidence: https://www.first.org/members/teams/roblox_detection_and_response_team-dart
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FIRST member teams (api.first.org/data/v1/teams, public JSON API)
+    standard: FIRST (Forum of Incident Response and Security Teams) membership
+    spec_file: null
+    role: first-member-team
+    registered_name: Roblox Corporation
+    matched_domain: roblox.com
+    matched_by: domain+name-among-holders
+    teams:
+    - id: roblox_detection_and_response_team-dart
+      team: Roblox Detection and Response Team (DART)
+      team_type: null
+      member_since: January 29, 2024
+      country: US
+    signal_note: FIRST full membership of an incident-response / product-security team = participation; team_type
+      names CSIRT / PSIRT / SOC; never a count
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: roblox-raycast
+  label: Raycast
+  partner: raycast
+  partner_name: Raycast
+  category: Raycast Store extension (community wrapper)
+  type: marketplace
+  marketplace: raycast-store
+  channel: connector-listing
+  evidence: https://www.raycast.com/iamEvan/roblox
+  source: edge
+  relationship: connector-coverage
+  contract_reference:
+    register: Raycast Store (raycast/extensions monorepo + store_listings JSON)
+    spec_file: null
+    role: raycast-community-wrapper
+    builder: community
+    authors:
+    - TaylorRobinson
+    - ben_rowlands
+    - iamEvan
+    - zw1ce
+    matched_domain: roblox.com
+    matched_by: domain+name-among-holders
+    monorepo_commit: 84f9ac51336a8c69f70974a75bc067c0feae3658
+    listings:
+    - title: Roblox
+      store_url: https://www.raycast.com/iamEvan/roblox
+      installs: 648
+      categories:
+      - Productivity
+      - Fun
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox/
+      author: iamEvan
+    - title: Roblox
+      store_url: https://www.raycast.com/TaylorRobinson/roblox-games
+      installs: 258
+      categories: []
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-games/
+      author: TaylorRobinson
+    - title: Roblox Creator Docs
+      store_url: https://www.raycast.com/ben_rowlands/roblox-creator-docs
+      installs: 57
+      categories:
+      - Developer Tools
+      - Documentation
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-creator-docs/
+      author: ben_rowlands
+    - title: Roblox Developer Tools
+      store_url: https://www.raycast.com/zw1ce/roblox-developer-tools
+      installs: 0
+      categories:
+      - Developer Tools
+      source: https://github.com/raycast/extensions/tree/84f9ac51336a8c69f70974a75bc067c0feae3658/extensions/roblox-developer-tools/
+      author: zw1ce
+    categories:
+    - Developer Tools
+    - Documentation
+    - Fun
+    - Productivity
+    identity_note: the extension's own source calls a host on the product's domain AND its title / package name
+      passes partner_link's name check; built by Raycast community developers, not the vendor
+    signal_note: 'coverage: Raycast''s store reaches the product through community-built extensions; one edge per
+      (product, store); install / listing counts are context, never counted'
+    detected_by: sweep-raycast-store-extensions.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
