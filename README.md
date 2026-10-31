@@ -1,4 +1,4 @@
-# roblox
+# Roblox
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Roblox — UGC platform + Open Cloud API + Luau scripting
+Roblox is a user-generated content platform where creators build, publish, and monetize immersive 3D experiences using Roblox Studio and the Luau scripting language. Roblox exposes three distinct developer surfaces: the in-engine Luau scripting API (Roblox Engine API) running inside experiences and Studio plugins, the Roblox Studio plugin API for editor tooling, and the Open Cloud API (apis.roblox.com) for external programmatic access from servers, build pipelines, and back-office tools. The Open Cloud surface covers DataStores, Memory Stores, Messaging Service, Place Publishing, Universes, Assets, Inventory, Users, Groups, Notifications, Subscriptions, and Luau Execution, authenticated either with API keys scoped per-resource or with OAuth 2.0 for third-party apps. Roblox also publishes deep documentation for the Engine API at create.roblox.com/docs and the legacy ROBLOX Web APIs that power the website (subdomains such as users.roblox.com, groups.roblox.com, inventory.roblox.com), which remain undocumented for third parties.
+
+**Areas:** Assets · Datastores · Game Development · Games · Luau · Messaging · Open Cloud · Roblox · Scripting · Studio · UGC · Universes
+
+## Roblox on APIs.io
+
+Everything profiled for Roblox is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/roblox/](https://apis.io/providers/roblox/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [Roblox Open Cloud API](https://apis.io/apis/roblox/roblox-open-cloud-api/) — The Roblox Open Cloud API is the official external REST surface for Roblox creators, studios, and partners. It exposes universes, places, place publishing,…
+- [Roblox Open Cloud Data Stores](https://apis.io/apis/roblox/roblox-open-cloud-datastores/) — The Data Stores Open Cloud API reads and writes persistent key-value data for an experience from outside the engine, including standard data stores and…
+- [Roblox Open Cloud Messaging Service](https://apis.io/apis/roblox/roblox-open-cloud-messaging-service/) — The Messaging Service Open Cloud API publishes messages to a topic that running game servers can subscribe to via the in-engine MessagingService class,…
+- [Roblox Open Cloud Place Publishing](https://apis.io/apis/roblox/roblox-open-cloud-place-publishing/) — The Place Publishing Open Cloud API uploads .rbxl or .rbxlx files to a place in a universe and either saves or publishes the new version, enabling CI/CD…
+- [Roblox Open Cloud Assets](https://apis.io/apis/roblox/roblox-open-cloud-assets/) — The Assets Open Cloud API creates, updates, and reads assets (audio, decals, images, models, mesh parts) on behalf of a user or group, used by asset…
+- [Roblox Engine API (Luau)](https://apis.io/apis/roblox/roblox-engine-api-luau/) — The Roblox Engine API is the in-engine scripting surface used inside experiences and Studio plugins. It is written in Luau, Roblox's typed dialect of Lua…
+- [Roblox Studio Plugin API](https://apis.io/apis/roblox/roblox-studio-plugin-api/) — The Roblox Studio Plugin API is a superset of the Engine API available to plugins running inside Roblox Studio. It exposes plugin-only services for…
+- [Roblox OAuth 2.0](https://apis.io/apis/roblox/roblox-oauth2/) — Roblox OAuth 2.0 lets third-party applications authenticate Roblox users and obtain scoped access tokens to call permitted Open Cloud resources on the…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/roblox/](https://apis.io/graphqls/roblox/roblox-graphql/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Roblox — creator docs rules](https://apis.io/rules/roblox/roblox-creator-docs-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Roblox Domain Security](https://apis.io/security/roblox/roblox-domain-security/)
+- [Roblox Vulnerability Disclosure](https://apis.io/security/roblox/roblox-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Roblox Plans Pricing](https://apis.io/plans/roblox/roblox-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Roblox Rate Limits](https://apis.io/rate-limits/roblox/roblox-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Roblox Finops](https://apis.io/finops/roblox/roblox-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.roblox.com)
+- [Documentation](https://create.roblox.com/docs)
+- [API reference](https://create.roblox.com/docs/cloud/reference)
+- [Support](https://en.help.roblox.com)
+- [Blog](https://blog.roblox.com)
+- [Terms of service](https://www.roblox.com/info/terms)
+- [Privacy policy](https://www.roblox.com/info/privacy)
+- [GitHub](https://github.com/Roblox)
+
+## API Evangelist rating
+
+**Kin Score 28.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 0.0 |
+| Contract governance | 45.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 26.3 |
+
+**Agent readiness 3.1** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 25.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/roblox/](https://apis.io/providers/roblox/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Roblox: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/roblox/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
